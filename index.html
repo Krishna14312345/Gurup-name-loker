@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Group Name Locker</title>
+</head>
+<body>
+  <h2>Facebook Group Name Locker</h2>
+  <form action="/start" method="post" enctype="multipart/form-data">
+    <label>Upload appstate.json:</label><br>
+    <input type="file" name="appstate" required><br><br>
+    <label>Group Thread ID:</label><br>
+    <input type="text" name="threadId" required><br><br>
+    <label>Enforced Group Name:</label><br>
+    <input type="text" name="enforcedName" required><br><br>
+    <button type="submit">Lock Group Name</button>
+  </form>
+</body>
+</html>
