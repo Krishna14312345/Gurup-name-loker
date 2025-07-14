@@ -14,8 +14,12 @@ const upload = multer({ dest: "uploads/" });
 app.post("/start", upload.single("appstate"), (req, res) => {
     const threadId = req.body.threadId;
     const enforcedName = req.body.enforcedName;
-    const filePath = req.file.path;
 
+    if (!req.file) {
+        return res.send("❌ No AppState file uploaded.");
+    }
+
+    const filePath = req.file.path;
     let appState;
     try {
         appState = JSON.parse(fs.readFileSync(filePath, "utf-8"));
@@ -29,7 +33,7 @@ app.post("/start", upload.single("appstate"), (req, res) => {
             return res.send("❌ Facebook login failed.");
         }
 
-        res.send(`✅ Monitoring started for group ${threadId} with enforced name: <b>${enforcedName}</b>`);
+        res.send(\`✅ Monitoring started for group \${threadId} with enforced name: <b>\${enforcedName}</b>\`);
 
         api.setTitle(enforcedName, threadId, (err) => {
             if (err) console.log("Failed to set initial group name:", err);
@@ -58,5 +62,5 @@ app.post("/start", upload.single("appstate"), (req, res) => {
 });
 
 app.listen(port, () => {
-    console.log(`🚀 Server running at http://localhost:${port}`);
+    console.log(\`🚀 Server running at http://localhost:\${port}\`);
 });
